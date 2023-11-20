@@ -15,17 +15,20 @@ const WeatherApp = () => {
     return (
         <div>
             <SearchBar/>
-            {loading ? (<Loading/>):
-            (
+            {loading? <Loading/>: null}
+            {
                 cityList.map(city=>(
                     <CityCard 
-                        key = {city.id}
-                        id = {city.id}
+                        key = {city.lat + ',' + city.lon}
                         name={city.name}
                         state={city.state}
+                        country={city.country}
+                        lat = {city.lat}
+                        lon = {city.lon}
                     />
                 ))
-            )}
+            }
+            
             
         </div>
     );

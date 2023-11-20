@@ -8,6 +8,6 @@ Replicado do tutorial:
 
 # [Weather App](./weather-app)
 
-Integrado com a API do climatempo
+Integrado com a API OpenWeather
 
 ****************

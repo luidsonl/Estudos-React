@@ -6,6 +6,8 @@ const WeatherAppContext = createContext();
 const WeatherAppProvider = ({ children }) => {
   const [citySearch, setCitySearch] = useState('')
   const [cityList, setCityList] = useState([])
+  const [weatherData, setWeatherData]= useState({})
+
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   
@@ -18,18 +20,21 @@ const WeatherAppProvider = ({ children }) => {
           setLoading(true)
 
           const response = await fetch(
-            `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${citySearch}&country=BR&token=${apiKey}`
+            `http://api.openweathermap.org/geo/1.0/direct?q=${citySearch},br&limit=5&appid=${apiKey}`
           )
     
           if (!response.ok) {
-            setErrorMessage('Erro ao obter dados meteorológicos');
+            setErrorMessage('Erro ao buscar cidade');
           }
           
-          const data = await response.json()
-          
-          if(data.length <= 20){
-            setCityList(data)
+          let data = await response.json()
+
+          if(data.length >= 10){
+            data = data.slice(0, 10)
           }
+          
+
+          setCityList(data)
           
         } catch (error) {
           console.error(error)
@@ -45,11 +50,36 @@ const WeatherAppProvider = ({ children }) => {
     
   },[citySearch])
   
+  const getForecast = async (lat, lon)=>{
 
+    try{
+
+      setLoading(true)
+
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${apiKey}`
+      )
+
+      if (!response.ok) {
+        setErrorMessage('Erro ao obter previsão do tempo');
+      }
+
+      const data = await response.json()
+
+      setWeatherData(data.list)
+
+      console.log(data.list)
+
+    }catch(error){
+      console.error(error)
+    }finally{
+      setLoading(false)
+    }
+  }
 
 
   return (
-    <WeatherAppContext.Provider value={{ citySearch, setCitySearch, cityList, setCityList, errorMessage, loading}}>
+    <WeatherAppContext.Provider value={{ citySearch, cityList,weatherData, setCitySearch, setCityList, setWeatherData, errorMessage, loading, getForecast}}>
       {children}
     </WeatherAppContext.Provider>
   );
