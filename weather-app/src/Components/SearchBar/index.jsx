@@ -18,7 +18,7 @@ const CityList = () => {
     }
 
     return (
-        <div>
+        <div className="search-bar">
             <form onSubmit={updateCitySearch}>
                 <input type="text" onChange={handleInputChange}/>
                 <button type="submit">Search</button>

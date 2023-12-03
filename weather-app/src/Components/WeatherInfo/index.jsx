@@ -7,11 +7,12 @@ const WeatherInfo = ()=>{
     const {weatherData} = useContext(WeatherAppContext)
     return(
         <>
-            <div>
+            <div className="city-info">
                 <h2> {weatherData.name} </h2>
                 <h3>{weatherData.state}</h3>
                 <h3>{weatherData.country}</h3>
             </div>
+            <div className="forecast">
             {
                 weatherData.data.map((timestamp)=>(
                     <WeatherCard 
@@ -20,6 +21,8 @@ const WeatherInfo = ()=>{
                     />
                 ))
             }
+            </div>
+           
         </>
     )
 

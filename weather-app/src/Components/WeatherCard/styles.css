@@ -1,3 +1,17 @@
 .weather-card{
     margin:2em;
+    padding: 1.5em;
+    width: 400px;
+    height: auto;
+    border: 1px solid #555;
+    border-radius: 20px;
+    background-color: #dfd;
+}
+.weather-card-data{
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+.weather-card-data-value{
+    font-weight: bold;
 }

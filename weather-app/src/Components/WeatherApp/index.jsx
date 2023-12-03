@@ -4,9 +4,9 @@ import { WeatherAppContext } from "../../Contexts/WeatherApp";
 
 
 import SearchBar from "../SearchBar";
-import CityCard from '../CityCard';
 import Loading from '../Loading';
 import WeatherInfo from '../WeatherInfo';
+import CityList from '../CityList';
 
 
 
@@ -17,18 +17,7 @@ const WeatherApp = () => {
         <div>
             <SearchBar/>
             {loading? <Loading/>: null}
-            {
-                cityList.map(city=>(
-                    <CityCard 
-                        key = {city.lat + ',' + city.lon}
-                        name={city.name}
-                        state={city.state}
-                        country={city.country}
-                        lat = {city.lat}
-                        lon = {city.lon}
-                    />
-                ))
-            }
+            {cityList? <CityList/> : null}
             {weatherData? <WeatherInfo/> : null}
             
         </div>
