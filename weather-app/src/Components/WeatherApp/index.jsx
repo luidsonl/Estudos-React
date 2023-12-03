@@ -6,11 +6,12 @@ import { WeatherAppContext } from "../../Contexts/WeatherApp";
 import SearchBar from "../SearchBar";
 import CityCard from '../CityCard';
 import Loading from '../Loading';
+import WeatherInfo from '../WeatherInfo';
 
 
 
 const WeatherApp = () => {
-    const {cityList, loading} = useContext(WeatherAppContext)
+    const {cityList, loading, weatherData} = useContext(WeatherAppContext)
 
     return (
         <div>
@@ -28,7 +29,7 @@ const WeatherApp = () => {
                     />
                 ))
             }
-            
+            {weatherData? <WeatherInfo/> : null}
             
         </div>
     );

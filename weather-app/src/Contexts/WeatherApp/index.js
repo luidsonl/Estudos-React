@@ -6,7 +6,7 @@ const WeatherAppContext = createContext();
 const WeatherAppProvider = ({ children }) => {
   const [citySearch, setCitySearch] = useState('')
   const [cityList, setCityList] = useState([])
-  const [weatherData, setWeatherData]= useState({})
+  const [weatherData, setWeatherData]= useState()
 
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
@@ -50,8 +50,9 @@ const WeatherAppProvider = ({ children }) => {
     
   },[citySearch])
   
-  const getForecast = async (lat, lon)=>{
-
+  const getForecast = async (...params)=>{
+    const [name, state, country, lat, lon] = params
+    
     try{
 
       setLoading(true)
@@ -66,9 +67,24 @@ const WeatherAppProvider = ({ children }) => {
 
       const data = await response.json()
 
-      setWeatherData(data.list)
+      setWeatherData({
+        'name': name,
+        'state': state,
+        'country': country,
+        'data': data.list.map(
+          (timestamp)=>{
+            return {
+              date: timestamp.dt_txt,
+              temp: timestamp.main.temp,
+              description: timestamp.weather[0].description,
+              wind_speed: timestamp.wind.speed
+            }
+          }
+        )
+      })
+      console.log(weatherData)
 
-      console.log(data.list)
+      setCityList([])
 
     }catch(error){
       console.error(error)

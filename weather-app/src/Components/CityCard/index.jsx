@@ -6,7 +6,7 @@ import { WeatherAppContext } from "../../Contexts/WeatherApp";
 
 const CityCard = ({name, state, country,lat, lon }) => {
     const handleClick = ()=>{
-        getForecast(lat, lon)
+        getForecast(name, state, country, lat, lon)
     }
 
 
