@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import apiKey from '../../env';
+import env from '../../env.json';
+
+const apiKey = env.apiKey;
 
 const WeatherAppContext = createContext();
 

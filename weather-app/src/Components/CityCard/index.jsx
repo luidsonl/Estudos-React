@@ -13,7 +13,7 @@ const CityCard = ({name, state, country,lat, lon }) => {
     const {getForecast} = useContext(WeatherAppContext)
 
     return (
-        <div onClick={()=>{handleClick()}} className="card">
+        <div onClick={()=>{handleClick()}} className="city-card">
             <h2>{name}</h2>
             <p>{state}</p>
             <p>{country}</p>
