@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import MainMenuApi from '../../services/api/MainMenuApi';
+import BlogSettingsApi from '../../services/api/BlogSettingsApi';
 
 const Navbar = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -10,7 +10,7 @@ const Navbar = () => {
   useEffect(() => {
     async function fetchMenuItems() {
       try {
-        const items = await MainMenuApi.getItems();
+        const items = await BlogSettingsApi.getMainMenuItems();
         setMenuItems(items);
       } catch (err) {
         setError(err.message);
@@ -23,7 +23,7 @@ const Navbar = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Carregando menu...</div>;
   }
 
   if (error) {

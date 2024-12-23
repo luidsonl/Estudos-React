@@ -1,11 +1,9 @@
-const PokemonSingle = () =>{
-  return(
+const PokemonSingle = () => {
+  return (
     <>
-      <h1>
-        Pokemon Único
-      </h1>
+      <h1>Pokemon Único</h1>
     </>
-  )
-}
+  );
+};
 
-export default PokemonSingle
+export default PokemonSingle;

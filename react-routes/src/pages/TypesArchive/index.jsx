@@ -1,11 +1,9 @@
-const TypesArchive = () =>{
-    return(
-      <>
-        <h1>
-          Tipos
-        </h1>
-      </>
-    )
-  }
-  
-  export default TypesArchive
+const TypesArchive = () => {
+  return (
+    <>
+      <h1>Tipos</h1>
+    </>
+  );
+};
+
+export default TypesArchive;
