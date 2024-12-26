@@ -1,30 +1,35 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import PokemonApi from '../../services/api/PokemonApi';
+import PokemonCard from '../../components/PokemonCard';
+import { useSearchParams } from 'react-router-dom';
+import Pagination from '../../components/Pagination';
 
 const PokemonArchive = () => {
+  const archiveType = 'pokemon';
+
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [pagination, setPagination] = useState(1);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+
+  const currentPage = parseInt(searchParams.get('page')) || 1;
 
   useEffect(() => {
     async function fetchPokemons() {
       setLoading(true);
       try {
-        const data = await PokemonApi.getPokemons();
+        const data = await PokemonApi.getPokemons(currentPage);
         setPokemons(data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
-
-        console.log(pokemons);
       }
     }
 
     fetchPokemons();
-  }, []);
+  }, [currentPage]);
 
   if (loading) {
     return <div>Carregando Lista...</div>;
@@ -36,14 +41,19 @@ const PokemonArchive = () => {
 
   return (
     <>
-      <h1>Pokemons:</h1>
-      <ul>
-        {pokemons.map((pokemon, index) => (
-          <li key={index}>
-            <h2>{pokemon.name}</h2>
-          </li>
-        ))}
-      </ul>
+      <section>
+        <h1>Pokemons:</h1>
+        <ul>
+          {pokemons.map((pokemon, index) => (
+            <li key={index}>
+              <PokemonCard pokemon={pokemon} />
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <Pagination archiveType={archiveType} />
+      </section>
     </>
   );
 };

@@ -3,28 +3,33 @@ function sleep(ms) {
 }
 
 class BlogSettingsApi {
-  static mainMenuItems = [
-    {
-      title: 'Home',
-      route: '/',
-    },
-    {
-      title: 'Pokemons',
-      route: '/pokemons',
-    },
-    {
-      title: 'Tipos',
-      route: '/types',
-    },
-    {
-      title: 'Regiões',
-      route: '/regions',
-    },
-  ];
-
   static async getMainMenuItems() {
-    await sleep(1000);
-    return this.mainMenuItems;
+    return [
+      {
+        title: 'Home',
+        route: '/',
+      },
+      {
+        title: 'Pokemons',
+        route: '/pokemons',
+      },
+      {
+        title: 'Tipos',
+        route: '/types',
+      },
+      {
+        title: 'Regiões',
+        route: '/regions',
+      },
+    ];
+  }
+
+  static async getPaginationSettings() {
+    return {
+      itemsPerPage: 10,
+      maxVisiblePages: 5,
+      showFirstAndLastPages: false,
+    };
   }
 }
 
