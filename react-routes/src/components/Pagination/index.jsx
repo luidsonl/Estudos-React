@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import './Pagination.css'
 
 import BlogSettingsApi from '../../services/api/BlogSettingsApi';
 import PokemonApi from '../../services/api/PokemonApi';
@@ -124,11 +125,18 @@ const Pagination = ({ archiveType }) => {
       const numberOfPages = Math.ceil(totalItems / itemsPerPage);
       const currentPage = parseInt(searchParams.get('page')) || 1;
 
-      setPageLinks(await generatePageLinks(currentPage, numberOfPages));
-    };
+      const pageLinks = await generatePageLinks(currentPage, numberOfPages);
 
-    generatePageLinksContent();
-  }, [searchParams, paginationSettings]);
+      setPageLinks(pageLinks);
+    };
+    if (!loading && paginationSettings.itemsPerPage) {
+      generatePageLinksContent();
+    }
+  }, [searchParams, paginationSettings, loading]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return <ul>{pageLinks}</ul>;
 };

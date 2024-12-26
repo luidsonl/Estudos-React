@@ -28,7 +28,7 @@ class BlogSettingsApi {
     return {
       itemsPerPage: 10,
       maxVisiblePages: 5,
-      showFirstAndLastPages: false,
+      showFirstAndLastPages: true,
     };
   }
 }
