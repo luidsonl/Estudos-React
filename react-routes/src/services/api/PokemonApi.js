@@ -3,7 +3,7 @@ import BlogSettingsApi from './BlogSettingsApi';
 class PokemonApi {
   static baseUrl = 'https://pokeapi.co/api/v2/';
 
-  static async getPokemons(page) {
+  static async queryAllPokemons(page) {
     let url = this.baseUrl + 'pokemon';
     const paginationSettings = await BlogSettingsApi.getPaginationSettings();
 
@@ -33,7 +33,7 @@ class PokemonApi {
       }
 
       const data = await res.json();
-      return data.results;
+      return data;
     } catch (error) {
       console.error('Fetch error:', error);
       throw error;

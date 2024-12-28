@@ -9,6 +9,7 @@ const PokemonArchive = () => {
   const archiveType = 'pokemon';
 
   const [pokemons, setPokemons] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
@@ -19,8 +20,9 @@ const PokemonArchive = () => {
     async function fetchPokemons() {
       setLoading(true);
       try {
-        const data = await PokemonApi.getPokemons(currentPage);
-        setPokemons(data);
+        const data = await PokemonApi.queryAllPokemons(currentPage);
+        setTotalItems(data.count);
+        setPokemons(data.results);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -52,7 +54,7 @@ const PokemonArchive = () => {
         </ul>
       </section>
       <section>
-        <Pagination archiveType={archiveType} />
+        <Pagination totalItems={totalItems} />
       </section>
     </>
   );

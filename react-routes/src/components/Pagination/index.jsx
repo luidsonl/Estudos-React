@@ -3,12 +3,8 @@ import { useEffect, useState } from 'react';
 import './Pagination.css'
 
 import BlogSettingsApi from '../../services/api/BlogSettingsApi';
-import PokemonApi from '../../services/api/PokemonApi';
 
-const Pagination = ({ archiveType }) => {
-  const totalItemsObj = {
-    pokemon: () => PokemonApi.getTotalCount(),
-  };
+const Pagination = ({ totalItems }) => {
 
   const [pageLinks, setPageLinks] = useState([]);
   const [paginationSettings, setPaginationSettings] = useState({});
@@ -113,12 +109,7 @@ const Pagination = ({ archiveType }) => {
 
   useEffect(() => {
     const generatePageLinksContent = async () => {
-      if (!totalItemsObj[archiveType]) {
-        console.error(`Invalid archiveType: ${archiveType}`);
-        return;
-      }
 
-      const totalItems = await totalItemsObj[archiveType]();
 
       const itemsPerPage = paginationSettings.itemsPerPage;
 
