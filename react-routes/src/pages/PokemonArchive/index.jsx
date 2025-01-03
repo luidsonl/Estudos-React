@@ -48,7 +48,7 @@ const PokemonArchive = () => {
         <ul>
           {pokemons.map((pokemon, index) => (
             <li key={index}>
-              <PokemonCard pokemon={pokemon} />
+              <PokemonCard endpoint={pokemon.url} />
             </li>
           ))}
         </ul>
