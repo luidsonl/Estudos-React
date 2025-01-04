@@ -32,7 +32,7 @@ const PokemonCard = ({ endpoint }) => {
   }
 
   return (
-    <Link to={`pokemons/${pokemon.name}`}>
+    <Link to={`${pokemon.name}`}>
       <div className="pokemon-card">
         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         <h2>{pokemon.name}</h2>
