@@ -1,5 +1,5 @@
-import ConfigTypes from './ConfigTypes';
-import SeoTypes from './SeoTypes';
+import ConfigTypes from '../types/ConfigTypes';
+import SeoTypes from '../types/SeoTypes';
 
 class BlogConfigService {
   private config: ConfigTypes;
@@ -18,6 +18,10 @@ class BlogConfigService {
       home: {
         title: 'Pokedex Fuleira',
         description: 'Só mais uma pokedex genérica que ninguém aguenta mais',
+      },
+      404: {
+        title: 'Não encontrado',
+        description: 'Você sabia Titã, uma das luas de Saturno, o único satélite natural no sistema solar com uma atmosfera densa?',
       },
     };
   }

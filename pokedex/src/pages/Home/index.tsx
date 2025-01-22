@@ -3,24 +3,24 @@ import BlogConfigService from '../../services/BlogConfigService';
 import Head from '../../components/Head';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import SeoTypes from '../../services/BlogConfigService/SeoTypes';
+import SeoTypes from '../../types/SeoTypes';
 
 function Home() {
   const [seo, setSeo] = useState<SeoTypes | undefined>();
 
   useEffect(() => {
-    async function fetchBlogName() {
+    async function getSeo() {
       const seo = await BlogConfigService.getSeo('home');
 
       setSeo(seo);
     }
 
-    fetchBlogName();
+    getSeo();
   });
 
   return (
     <>
-      {seo ? <Head seo={seo} /> : null}
+      <Head seo={seo} />
       <MainLayout>
         <h1>Home</h1>
       </MainLayout>

@@ -1,13 +1,14 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import SeoTypes from '../../services/BlogConfigService/SeoTypes';
+import SeoTypes from '../../types/SeoTypes';
 import BlogConfigService from '../../services/BlogConfigService';
 import { useState, useEffect } from 'react';
 
 interface Props {
-  seo: SeoTypes;
+  seo?: SeoTypes;
+  statusCode?: '200' | '404';
 }
 
-function Head({ seo }: Props) {
+function Head({ seo, statusCode = '200' }: Props) {
   const [blogName, setBlogName] = useState<string>('');
 
   useEffect(() => {
@@ -19,11 +20,15 @@ function Head({ seo }: Props) {
     fetchBlogName();
   }, []);
 
+  const title = seo?.title || blogName;
+  const description = seo?.description;
+
   return (
     <HelmetProvider>
       <Helmet>
-        {seo.title ? <title>{seo.title}</title> : <title>{blogName}</title>}
-        {seo.description && <meta name="description" content={seo.description} />}
+        <title>{title}</title>
+        {description && <meta name="description" content={description} />}
+        <meta http-equiv="Status" content={statusCode} />
       </Helmet>
     </HelmetProvider>
   );
