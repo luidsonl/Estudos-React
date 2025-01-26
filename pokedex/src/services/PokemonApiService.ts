@@ -1,4 +1,4 @@
-import PokemonList from "../types/PokemonList";
+import PokemonList from "../types/PokemonListTypes";
 import fetchApi from "../utils/fetchApi";
 
 class PokemonApiService{
@@ -13,7 +13,11 @@ class PokemonApiService{
         return fetchApi(`${this.apiBaseUrl}/pokemon/?limit=100000&offset=0`);
     }
 
-    getPokemonsByPage(page: number = 1,limit: number ): Promise<PokemonList>{
+    getPokemonsByPage(page: any = 1,limit: number ): Promise<PokemonList>{
+        const pageTypes = ['number', 'string']
+        if(!pageTypes.includes(typeof page)){
+            page = 1
+        }
         const offset = (page - 1) * limit
         return fetchApi(`${this.apiBaseUrl}/pokemon/?limit=${limit}&offset=${offset}`);
     }
