@@ -1,11 +1,11 @@
-import PokemonNameUrlTypes from "./PokemonNameUrlTypes"
-
-
-interface PokemonListTypes{
-    count: number,
-    next: string | null,
-    previous: string | null
-    results: PokemonNameUrlTypes[]
+interface PokemonListTypes {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    name: string;
+    url: string;
+  }[];
 }
 
-export default PokemonListTypes
+export default PokemonListTypes;

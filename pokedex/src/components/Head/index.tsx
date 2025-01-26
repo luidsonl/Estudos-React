@@ -27,8 +27,8 @@ function Head({ seo, statusCode = '200' }: Props) {
     <HelmetProvider>
       <Helmet>
         <title>{title}</title>
-        {description && <meta name="description" content={description} />}
-        <meta http-equiv="Status" content={statusCode} />
+        {description && <meta name='description' content={description} />}
+        <meta http-equiv='Status' content={statusCode} />
       </Helmet>
     </HelmetProvider>
   );

@@ -21,7 +21,8 @@ class BlogConfigService {
       },
       404: {
         title: 'Não encontrado',
-        description: 'Você sabia Titã, uma das luas de Saturno, o único satélite natural no sistema solar com uma atmosfera densa?',
+        description:
+          'Você sabia Titã, uma das luas de Saturno, o único satélite natural no sistema solar com uma atmosfera densa?',
       },
     };
   }

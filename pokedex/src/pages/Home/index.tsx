@@ -16,7 +16,7 @@ function Home() {
     }
 
     getSeo();
-  });
+  }, []);
 
   return (
     <>

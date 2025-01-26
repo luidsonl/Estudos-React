@@ -7,7 +7,7 @@ function Routes() {
   return (
     <ReactRouterDomRoutes>
       <Route index element={<Home />} />
-      <Route path='pokemon' element={<PokemonArchive/>} />
+      <Route path='pokemon' element={<PokemonArchive />} />
       <Route path='*' element={<NotFound />} />
     </ReactRouterDomRoutes>
   );
