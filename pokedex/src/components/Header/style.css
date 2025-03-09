@@ -20,5 +20,28 @@
     & .menu-list{
         color: var(--main-menu-link-light);
     }
+
+    & .menu-list .menu-item:hover{
+        color: var(--main-menu-link-hover-light);
+    }
+
+    & .menu-list .menu-item .active{
+        color: var(--main-menu-link-active-light)
+    }
+}
+
+.dark #main-menu {
+    background-color: var(--main-menu-background-dark);
+
+    & .menu-list{
+        color: var(--main-menu-link-dark);
+    }
     
+    & .menu-list .menu-item:hover{
+        color: var(--main-menu-link-hover-dark);
+    }
+
+    & .menu-list .menu-item .active{
+        color: var(--main-menu-link-active-dark)
+    }
 }

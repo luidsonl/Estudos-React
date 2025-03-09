@@ -45,7 +45,11 @@ function Header() {
             <ul className="menu-list">
               {menuItems.items.map((item, index)=>(
                 <li className="menu-item" key={index}>
-                  <Link to={item.path} key={item.path}>{item.title}</Link>
+                  <Link 
+                    to={item.path} 
+                    key={item.path}
+                    className={window.location.pathname === item.path ? 'active' : ''}
+                  >{item.title}</Link>
                 </li>
               ))}
             </ul>
