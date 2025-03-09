@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router-dom";
+import UserConfigService from "../../services/UserConfigService";
 
 interface PaginationProps {
   totalPages: number;
@@ -10,8 +11,10 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
     
     const updateCurrentPage = (page: number) => {
         setSearchParams({ page: page.toString() });
+        window.scrollTo(0, 0);
     };
 
+    const pageRange = UserConfigService.getPaginationRange();
 
   return (
     <nav>
@@ -25,12 +28,12 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           if (
             page === 1 ||
             page === totalPages ||
-            (page >= currentPage - 2 && page <= currentPage + 2)
+            (page >= currentPage - pageRange && page <= currentPage + pageRange)
           ) {
             return (
               <li key={page}>
                 <button
-                  onClick={() => updateCurrentPage(page)}
+                  onClick={page !== currentPage ? () => updateCurrentPage(page) : undefined}
                   className={page === currentPage ? 'active' : ''}
                 >
                   {page}
@@ -38,8 +41,8 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
               </li>
             );
           } else if (
-            (page === currentPage - 3 && currentPage > 4) ||
-            (page === currentPage + 3 && currentPage < totalPages - 3)
+            (page === currentPage - pageRange - 1 && currentPage > pageRange + 2) ||
+            (page === currentPage + pageRange + 1 && currentPage < totalPages - pageRange - 1)
           ) {
             return <li key={page}>...</li>;
           }

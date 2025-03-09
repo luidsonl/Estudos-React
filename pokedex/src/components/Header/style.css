@@ -19,10 +19,14 @@
 }
 #main-menu .main-menu-inner{
     max-width: var(--header-width);
-    width: 100%;
-
-    
+    width: 100%;   
 }
+#main-menu .main-menu-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .light #main-menu {
     background-color: var(--main-menu-background-light);
 

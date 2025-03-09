@@ -3,6 +3,7 @@ import BlogConfigService from "../../services/BlogConfigService";
 import MenuTypes from "../../types/MenuTypes";
 import { Link } from 'react-router-dom';
 import './style.css';
+import SearchBar from "../SearchBar";
 
 
 
@@ -30,6 +31,7 @@ function Header() {
   return (
     <header id="main-menu">
       <nav className="main-menu-inner">
+        <div className="main-menu-top">
         {
           blogName?
           (
@@ -39,6 +41,9 @@ function Header() {
             <div>Carregando</div>
           )
         }
+        <SearchBar />
+        </div>
+        
         {
           menuItems?
           (

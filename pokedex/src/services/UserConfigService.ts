@@ -5,16 +5,24 @@ class UserConfigService{
 
     constructor(){
         this.config = {
-            theme: 'light'
+            theme: 'light',
+            paginationRange: 2,
         }
     }
 
     getTheme(): string{
         return this.config.theme;
     }
-
+    
     toggleTheme() {
         this.config.theme = this.config.theme === 'light' ? 'dark' : 'light';
+    }
+
+    getPaginationRange(): number{
+        return this.config.paginationRange;
+    }
+    setPaginationRange(range: number){
+        this.config.paginationRange = range;
     }
 }
 
