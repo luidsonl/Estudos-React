@@ -78,6 +78,23 @@ class PokemonApiService {
   getPokemonByUrl(url: string): Promise<PokemonTypes> {
     return this.getWithCache(url, () => fetchApi(url));
   }
+
+  async searchPokemons(searchTerm: string, page: number = 1, limit: number = 20): Promise<PokemonList> {
+    const allPokemons = await this.getAllPokemons();
+    const filteredPokemons = allPokemons.results.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const offset = (page - 1) * limit;
+    const paginatedPokemons = filteredPokemons.slice(offset, offset + limit);
+
+    return {
+      next: null,
+      previous: null,
+      count: filteredPokemons.length,
+      results: paginatedPokemons,
+    };
+  }
 }
 
 export default new PokemonApiService();

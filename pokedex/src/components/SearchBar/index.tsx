@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
-const SearchBar: React.FC = () => {
+function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('s') || '');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchTerm(value);
-    setSearchParams({ s: value });
+  };
+
+  const handleSearchClick = () => {
+    setSearchParams({ s: searchTerm });
+    navigate(`/search/${searchTerm}`);
   };
 
   return (
-    <input
-      type="text"
-      value={searchTerm}
-      onChange={handleSearch}
-      placeholder="Buscar Pokémon"
-    />
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        placeholder="Buscar Pokémon"
+      />
+      <button onClick={handleSearchClick}>Buscar</button>
+    </div>
   );
 };
 
