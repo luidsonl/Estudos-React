@@ -1,0 +1,17 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  & .pagination {
+    display: flex;
+
+    & .pagination-item, & .pagination-arrow {
+        margin: 0 5px;
+    }
+
+    & .pagination-item .active{
+        font-weight: bold;
+    }
+  }
+}

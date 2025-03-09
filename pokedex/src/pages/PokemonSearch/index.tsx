@@ -8,7 +8,6 @@ import Head from '../../components/Head';
 import MainLayout from '../../layouts/MainLayout';
 import PokemonCard from '../../components/PokemonCard';
 import Pagination from '../../components/Pagination';
-import SearchBar from '../../components/SearchBar';
 import './style.css';
 
 function PokemonSearch() {
@@ -59,7 +58,7 @@ function PokemonSearch() {
       <Head seo={seo} />
       <MainLayout>
         <section id='page-title'>
-          <h2>Todos os pokemons</h2>
+          <h2>Resultados para: {term}</h2>
         </section>
         <section id='pokemon-list'>
           {pokemonList ? (

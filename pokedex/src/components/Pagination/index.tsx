@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import UserConfigService from "../../services/UserConfigService";
+import './style.css';
 
 interface PaginationProps {
   totalPages: number;
@@ -17,10 +18,10 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
     const pageRange = UserConfigService.getPaginationRange();
 
   return (
-    <nav>
+    <nav className="pagination-container">
       <ul className="pagination">
         {currentPage > 1 && (
-          <li>
+          <li className="pagination-arrow">
             <button onClick={() => updateCurrentPage(currentPage - 1)}>Previous</button>
           </li>
         )}
@@ -31,7 +32,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             (page >= currentPage - pageRange && page <= currentPage + pageRange)
           ) {
             return (
-              <li key={page}>
+              <li key={page} className="pagination-item">
                 <button
                   onClick={page !== currentPage ? () => updateCurrentPage(page) : undefined}
                   className={page === currentPage ? 'active' : ''}
@@ -44,12 +45,12 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
             (page === currentPage - pageRange - 1 && currentPage > pageRange + 2) ||
             (page === currentPage + pageRange + 1 && currentPage < totalPages - pageRange - 1)
           ) {
-            return <li key={page}>...</li>;
+            return <li key={page} className="pagination-item">...</li>;
           }
           return null;
         })}
         {currentPage < totalPages && (
-          <li>
+          <li className="pagination-arrow">
             <button onClick={() => updateCurrentPage(currentPage + 1)}>Next</button>
           </li>
         )}

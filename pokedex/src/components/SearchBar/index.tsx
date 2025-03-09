@@ -16,12 +16,19 @@ function SearchBar() {
     navigate(`/search/${searchTerm}`);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearchClick();
+    }
+  };
+
   return (
     <div>
       <input
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
+        onKeyPress={handleKeyPress}
         placeholder="Buscar Pokémon"
       />
       <button onClick={handleSearchClick}>Buscar</button>
