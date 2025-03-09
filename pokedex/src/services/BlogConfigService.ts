@@ -41,7 +41,7 @@ class BlogConfigService {
       },
     };
     this.cache = new Map();
-    this.cacheTTL = 60000;
+    this.cacheTTL = 600000;
   }
 
   private getFromCache<T>(key: string): T | null {
@@ -71,7 +71,6 @@ class BlogConfigService {
   async getBlogName() {
     return this.getWithCache('name', async () => {
       return new Promise<string>((resolve) => {
-        console.log('Fetch')
         setTimeout(() => {
           resolve(this.config.name);
         }, 1000);
