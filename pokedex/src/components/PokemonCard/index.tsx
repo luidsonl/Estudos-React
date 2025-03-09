@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PokemonApiService from '../../services/PokemonApiService';
 import PokemonTypes from '../../types/PokemonTypes';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 interface Props {
   url: string;
@@ -20,16 +21,22 @@ function PokemonCard({ url }: Props) {
   }, [url]);
 
   return (
-    <article>
+    <article className='pokemon-card'>
       {pokemon ? (
         <Link to={'/pokemon/' + pokemon.name}>
           {pokemon.sprites.front_default ? (
-            <img src={pokemon.sprites.front_default} alt='' />
+            <div className='card-image'>
+              <img
+                
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}/>
+            </div>
+
           ) : (
             ''
           )}
 
-          <h1>{pokemon.name}</h1>
+          <h3 className='pokemon-name'>{pokemon.name}</h3>
         </Link>
       ) : (
         <div>Carregando</div>

@@ -8,6 +8,7 @@ import Head from '../../components/Head';
 import MainLayout from '../../layouts/MainLayout';
 import PokemonCard from '../../components/PokemonCard';
 import Pagination from '../../components/Pagination';
+import './style.css';
 
 function PokemonArchive() {
   const [searchParams] = useSearchParams();
@@ -49,19 +50,28 @@ function PokemonArchive() {
     <>
       <Head seo={seo} />
       <MainLayout>
+        <section id='page-title'>
+          <h2>Todos os pokemons</h2>
+        </section>
+        <section id='pokemon-list'>
+          {pokemonList ? (
+            pokemonList.results.map((pokemon, index) => (
+              <PokemonCard key={index} url={pokemon.url}/>
+            ))
+          ) : (
+            <div>Carregando</div>
+          )}
+          
+        </section>
+        <section id='pagination'>
         {pokemonList ? (
-          pokemonList.results.map((pokemon, index) => (
-            <PokemonCard key={index} url={pokemon.url}/>
-          ))
-        ) : (
-          <div>Carregando</div>
-        )}
-        {pokemonList ? (
-          <Pagination
-            totalPages={Math.ceil(pokemonList.count / postsPerPage)}
-            currentPage={currentPage}
-          />
-        ) : null}
+            <Pagination
+              totalPages={Math.ceil(pokemonList.count / postsPerPage)}
+              currentPage={currentPage}
+            />
+          ) : null}
+        </section>
+        
       </MainLayout>
     </>
   );

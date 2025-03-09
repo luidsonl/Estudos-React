@@ -1,0 +1,20 @@
+.light {
+    & #footer{
+        background-color: var(--main-menu-background-light);
+        color: var(--main-menu-text-light);
+    }
+    
+}
+#footer{
+    display: flex;
+    justify-content: center;
+
+    & .footer-inner{
+        max-width: var(--header-width);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+}

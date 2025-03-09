@@ -1,5 +1,13 @@
+import './style.css'
+
 function Footer() {
-  return <h1>Footer</h1>;
+  return (
+    <footer id='footer'>
+      <div className="footer-inner">
+        <p>Footer content</p>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;

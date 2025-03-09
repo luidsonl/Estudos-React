@@ -5,6 +5,7 @@ import UserConfigService from "../../services/UserConfigService";
 import '../../styles/constants.css';
 import '../../styles/reset.css';
 import '../../styles/general.css';
+import './style.css';
 
 interface Types {
   children?: ReactNode;

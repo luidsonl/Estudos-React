@@ -3,6 +3,7 @@
     justify-content: center;
     padding: 20px;
     background-color: var();
+    margin-bottom: 20px;
     & .blog-title {
         font-size: var(--h3-size );
     }
@@ -19,6 +20,8 @@
 #main-menu .main-menu-inner{
     max-width: var(--header-width);
     width: 100%;
+
+    
 }
 .light #main-menu {
     background-color: var(--main-menu-background-light);
@@ -33,6 +36,9 @@
 
     & .menu-list .menu-item .active{
         color: var(--main-menu-link-active-light)
+    }
+    & .blog-title{
+        color: var(--main-menu-text-light);
     }
 }
 
@@ -49,5 +55,8 @@
 
     & .menu-list .menu-item .active{
         color: var(--main-menu-link-active-dark)
+    }
+    & .blog-title{
+        color: var(--main-menu-text-dark);
     }
 }

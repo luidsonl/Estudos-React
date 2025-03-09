@@ -12,6 +12,9 @@
     --main-menu-link-active-light: #a11;
     --main-menu-link-active-dark: #a66;
 
+    --main-menu-text-light: #111;
+    --main-menu-text-dark: #eee;
+
     /*heading size*/
     --h1-size: 2.5rem;
     --h2-size: 2rem;
