@@ -7,31 +7,43 @@ import PokemonListTypes from '../../types/PokemonListTypes';
 import Head from '../../components/Head';
 import MainLayout from '../../layouts/MainLayout';
 import PokemonCard from '../../components/PokemonCard';
+import Pagination from '../../components/Pagination';
 
 function PokemonArchive() {
   const [searchParams] = useSearchParams();
   const [pokemonList, setPokemonList] = useState<
     PokemonListTypes | undefined
   >();
+  const [postsPerPage, setPostsPerPage] = useState<number>(0);
   const [seo, setSeo] = useState<SeoTypes | undefined>();
+  const currentPage = parseInt(searchParams.get('page') || '1') || 1;
 
-  const page = searchParams.get('page');
 
   useEffect(() => {
-    async function setup() {
+    async function loadConfig() {
       const seo = await BlogConfigService.getSeo('home');
       setSeo(seo);
-
-      const postsPerPage = await BlogConfigService.getPostsPerPage();
-      const pokemonList = await PokemonApiService.getPokemonsByPage(
-        page,
-        postsPerPage,
-      );
-      setPokemonList(pokemonList);
+  
+      const posts = await BlogConfigService.getPostsPerPage();
+      setPostsPerPage(posts);
     }
-
-    setup();
-  }, [page]);
+  
+    loadConfig();
+  }, []);
+  
+  useEffect(() => {
+    if (postsPerPage > 0) {
+      async function fetchPokemons() {
+        const pokemonList = await PokemonApiService.getPokemonsByPage(
+          currentPage,
+          postsPerPage
+        );
+        setPokemonList(pokemonList);
+      }
+  
+      fetchPokemons();
+    }
+  }, [currentPage, postsPerPage]);
 
   return (
     <>
@@ -44,6 +56,12 @@ function PokemonArchive() {
         ) : (
           <div>Carregando</div>
         )}
+        {pokemonList ? (
+          <Pagination
+            totalPages={Math.ceil(pokemonList.count / postsPerPage)}
+            currentPage={currentPage}
+          />
+        ) : null}
       </MainLayout>
     </>
   );

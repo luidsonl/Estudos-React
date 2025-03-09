@@ -17,7 +17,7 @@ function PokemonCard({ url }: Props) {
     }
 
     setup();
-  }, []);
+  }, [url]);
 
   return (
     <article>
