@@ -1,0 +1,7 @@
+.page-width{
+    max-width: var(--page-width);
+}
+
+.header-width{
+    max-width: var(--header-width);
+}

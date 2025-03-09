@@ -1,4 +1,6 @@
 #main-menu{
+    display: flex;
+    justify-content: center;
     padding: 20px;
     background-color: var();
     & .blog-title {
@@ -13,6 +15,10 @@
             margin: 5px 20px;
         }
     }
+}
+#main-menu .main-menu-inner{
+    max-width: var(--header-width);
+    width: 100%;
 }
 .light #main-menu {
     background-color: var(--main-menu-background-light);

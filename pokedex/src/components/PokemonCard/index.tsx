@@ -22,7 +22,7 @@ function PokemonCard({ url }: Props) {
   return (
     <article>
       {pokemon ? (
-        <Link to={'/pokemon/' + pokemon.id}>
+        <Link to={'/pokemon/' + pokemon.name}>
           {pokemon.sprites.front_default ? (
             <img src={pokemon.sprites.front_default} alt='' />
           ) : (

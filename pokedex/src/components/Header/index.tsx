@@ -28,8 +28,8 @@ function Header() {
 
 
   return (
-    <header>
-      <nav id="main-menu">
+    <header id="main-menu">
+      <nav className="main-menu-inner">
         {
           blogName?
           (

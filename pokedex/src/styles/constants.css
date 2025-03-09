@@ -19,4 +19,8 @@
     --h4-size: 1.5rem;
     --h5-size: 1.25rem;
     --h6-size: 1rem;
+
+    /*width*/
+    --page-width:1200px;
+    --header-width: 1200px;
 }

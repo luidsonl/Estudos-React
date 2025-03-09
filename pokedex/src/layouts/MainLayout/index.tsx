@@ -3,7 +3,8 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import UserConfigService from "../../services/UserConfigService";
 import '../../styles/constants.css';
-import '../../styles/reset.css'
+import '../../styles/reset.css';
+import '../../styles/general.css';
 
 interface Types {
   children?: ReactNode;
@@ -22,9 +23,9 @@ function MainLayout({ children }: Types) {
   },[])
 
   return (
-    <div className={theme}>
+    <div className={theme + ' main-layout'}>
       <Header></Header>
-      <main>{children}</main>
+      <main className='page-width'>{children}</main>
       <Footer></Footer>
     </div>
   );
