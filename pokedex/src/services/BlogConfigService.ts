@@ -4,6 +4,8 @@ import SeoTypes from '../types/SeoTypes';
 class BlogConfigService {
   private config: ConfigTypes;
   private seo: { [path: string]: SeoTypes };
+  private cache: Map<string, { data: any; expiresAt: number }>;
+  private cacheTTL: number;
 
   constructor() {
     this.config = {
@@ -12,6 +14,19 @@ class BlogConfigService {
       theme: 'light',
       footerText: 'Nenhum direito reservado',
       featuredPokemons: ['pikachu', 'charmander'],
+      mainMenuItems: {
+        name: 'Main menu',
+        items:[
+          {
+            title: 'Home',
+            path: '/'
+          },
+          {
+            title: 'All pokemons',
+            path: '/pokemon/'
+          }
+        ]
+      }
     };
 
     this.seo = {
@@ -25,110 +40,93 @@ class BlogConfigService {
           'Você sabia Titã, uma das luas de Saturno, o único satélite natural no sistema solar com uma atmosfera densa?',
       },
     };
+    this.cache = new Map();
+    this.cacheTTL = 5000;
   }
 
-  // Exemplo de método assíncrono para pegar o nome do blog
+  private getFromCache<T>(key: string): T | null {
+    const cached = this.cache.get(key);
+    if (cached && cached.expiresAt > Date.now()) {
+      return cached.data;
+    }
+    this.cache.delete(key);
+    return null;
+  }
+
+  private setToCache<T>(key: string, data: T) {
+    this.cache.set(key, { data, expiresAt: Date.now() + this.cacheTTL });
+  }
+
+  private async getWithCache<T>(key: string, fetchData: () => Promise<T>): Promise<T> {
+    const cachedValue = this.getFromCache<T>(key);
+    if (cachedValue !== null) {
+      return Promise.resolve(cachedValue);
+    } else {
+      const data = await fetchData();
+      this.setToCache(key, data);
+      return data;
+    }
+  }
+
   async getBlogName() {
-    // Simulando uma chamada de API
-    return new Promise<string>((resolve) => {
-      setTimeout(() => {
-        resolve(this.config.name);
-      }, 1000); // Simulando o tempo de resposta da API
+    return this.getWithCache('name', async () => {
+      return new Promise<string>((resolve) => {
+        console.log('Fetch')
+        setTimeout(() => {
+          resolve(this.config.name);
+        }, 1000);
+      });
     });
   }
 
   async getPostsPerPage() {
-    return new Promise<number>((resolve) => {
-      setTimeout(() => {
-        resolve(this.config.postsPerPage);
-      }, 1000);
+    return this.getWithCache('postsPerPage', async () => {
+      return new Promise<number>((resolve) => {
+        setTimeout(() => {
+          resolve(this.config.postsPerPage);
+        }, 1000);
+      });
     });
   }
 
   async getTheme() {
-    return new Promise<string>((resolve) => {
-      setTimeout(() => {
-        resolve(this.config.theme);
-      }, 1000);
+    return this.getWithCache('theme', async () => {
+      return new Promise<string>((resolve) => {
+        setTimeout(() => {
+          resolve(this.config.theme);
+        }, 1000);
+      });
     });
   }
 
   async getFeaturedPokemons() {
-    return new Promise<string[]>((resolve) => {
-      setTimeout(() => {
-        resolve(this.config.featuredPokemons);
-      }, 1000);
+    return this.getWithCache('featuredPokemons', async () => {
+      return new Promise<string[]>((resolve) => {
+        setTimeout(() => {
+          resolve(this.config.featuredPokemons);
+        }, 1000);
+      });
     });
   }
 
   async getFooterText() {
-    return new Promise<string>((resolve) => {
-      setTimeout(() => {
-        resolve(this.config.footerText);
-      }, 1000);
+    return this.getWithCache('footerText', async () => {
+      return new Promise<string>((resolve) => {
+        setTimeout(() => {
+          resolve(this.config.footerText);
+        }, 1000);
+      });
     });
   }
 
   async getSeo(page: string) {
-    return new Promise<SeoTypes | undefined>((resolve) => {
-      setTimeout(() => {
-        resolve(this.seo[page]);
-      }, 1000);
-    });
-  }
-
-  // Métodos para alterar configurações (pode ser assíncrono se também vierem de uma API)
-  async setBlogName(name: string) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.config.name = name;
-        resolve();
-      }, 1000);
-    });
-  }
-
-  async setPostsPerPage(postsPerPage: number) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.config.postsPerPage = Math.floor(postsPerPage);
-        resolve();
-      }, 1000);
-    });
-  }
-
-  async setTheme(theme: 'light' | 'dark') {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.config.theme = theme;
-        resolve();
-      }, 1000);
-    });
-  }
-
-  async setFeaturedPokemons(pokemons: string[]) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.config.featuredPokemons = pokemons;
-        resolve();
-      }, 1000);
-    });
-  }
-
-  async setFooterText(footerText: string) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.config.footerText = footerText;
-        resolve();
-      }, 1000);
-    });
-  }
-
-  async setSeo(page: string, settings: SeoTypes) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        this.seo[page] = settings;
-        resolve();
-      }, 1000);
+    const cacheKey = `seo-${page}`;
+    return this.getWithCache(cacheKey, async () => {
+      return new Promise<SeoTypes | undefined>((resolve) => {
+        setTimeout(() => {
+          resolve(this.seo[page]);
+        }, 1000);
+      });
     });
   }
 }
