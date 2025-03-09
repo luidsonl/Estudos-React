@@ -38,8 +38,8 @@ function PokemonArchive() {
       <Head seo={seo} />
       <MainLayout>
         {pokemonList ? (
-          pokemonList.results.map((pokemon) => (
-            <PokemonCard key={pokemon.url} url={pokemon.url} />
+          pokemonList.results.map((pokemon, index) => (
+            <PokemonCard key={index} url={pokemon.url}/>
           ))
         ) : (
           <div>Carregando</div>

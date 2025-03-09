@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+body, button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.5;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+input,
+select,
+textarea {
+  border: none;
+  outline: none;
+}
+
+a:focus,
+button:focus {
+  outline: none;
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+main,
+header,
+footer,
+section,
+article,
+nav,
+aside {
+  display: block;
+}

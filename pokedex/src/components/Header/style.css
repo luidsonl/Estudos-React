@@ -1,0 +1,24 @@
+#main-menu{
+    padding: 20px;
+    background-color: var();
+    & .blog-title {
+        font-size: var(--h3-size );
+    }
+
+    & .menu-list{
+        display: flex;
+        justify-content: center;
+
+        & .menu-item{
+            margin: 5px 20px;
+        }
+    }
+}
+.light #main-menu {
+    background-color: var(--main-menu-background-light);
+
+    & .menu-list{
+        color: var(--main-menu-link-light);
+    }
+    
+}

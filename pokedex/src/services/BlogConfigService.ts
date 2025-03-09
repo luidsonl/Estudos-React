@@ -1,8 +1,9 @@
-import ConfigTypes from '../types/ConfigTypes';
+import BlogConfigTypes from '../types/BlogConfigTypes';
+import MenuTypes from '../types/MenuTypes';
 import SeoTypes from '../types/SeoTypes';
 
 class BlogConfigService {
-  private config: ConfigTypes;
+  private config: BlogConfigTypes;
   private seo: { [path: string]: SeoTypes };
   private cache: Map<string, { data: any; expiresAt: number }>;
   private cacheTTL: number;
@@ -11,7 +12,6 @@ class BlogConfigService {
     this.config = {
       name: 'Pokedex Fuleira',
       postsPerPage: 15,
-      theme: 'light',
       footerText: 'Nenhum direito reservado',
       featuredPokemons: ['pikachu', 'charmander'],
       mainMenuItems: {
@@ -41,7 +41,7 @@ class BlogConfigService {
       },
     };
     this.cache = new Map();
-    this.cacheTTL = 5000;
+    this.cacheTTL = 60000;
   }
 
   private getFromCache<T>(key: string): T | null {
@@ -89,21 +89,21 @@ class BlogConfigService {
     });
   }
 
-  async getTheme() {
-    return this.getWithCache('theme', async () => {
-      return new Promise<string>((resolve) => {
-        setTimeout(() => {
-          resolve(this.config.theme);
-        }, 1000);
-      });
-    });
-  }
 
   async getFeaturedPokemons() {
     return this.getWithCache('featuredPokemons', async () => {
       return new Promise<string[]>((resolve) => {
         setTimeout(() => {
           resolve(this.config.featuredPokemons);
+        }, 1000);
+      });
+    });
+  }
+  async getMainMenuItems() {
+    return this.getWithCache('mainMenuItems', async () => {
+      return new Promise<MenuTypes | undefined >((resolve) => {
+        setTimeout(() => {
+          resolve(this.config.mainMenuItems);
         }, 1000);
       });
     });

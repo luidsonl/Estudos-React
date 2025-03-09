@@ -22,7 +22,7 @@ function PokemonCard({ url }: Props) {
   return (
     <article>
       {pokemon ? (
-        <>
+        <Link to={'/pokemon/' + pokemon.id}>
           {pokemon.sprites.front_default ? (
             <img src={pokemon.sprites.front_default} alt='' />
           ) : (
@@ -30,7 +30,7 @@ function PokemonCard({ url }: Props) {
           )}
 
           <h1>{pokemon.name}</h1>
-        </>
+        </Link>
       ) : (
         <div>Carregando</div>
       )}

@@ -1,12 +1,11 @@
 import MenuTypes from "./MenuTypes";
 
-interface ConfigTypes {
+interface BlogConfigTypes {
   name: string;
   postsPerPage: number;
-  theme: 'light' | 'dark';
   footerText: string;
   featuredPokemons: string[];
   mainMenuItems?: MenuTypes;
 }
 
-export default ConfigTypes;
+export default BlogConfigTypes;
