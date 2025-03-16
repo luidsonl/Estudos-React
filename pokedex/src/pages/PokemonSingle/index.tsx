@@ -4,6 +4,8 @@ import PokemonApiService from "../../services/PokemonApiService";
 import { useParams } from "react-router-dom";
 import PokemonTypes from "../../types/PokemonTypes";
 import Gallery from "../../components/Gallery";
+import PokemonDetails from "../../components/PokemonDetails";
+import './style.css';
 
 function PokemonSingle(){
     const [pokemon, setPokemon] = useState<PokemonTypes | null>(null);
@@ -38,11 +40,16 @@ function PokemonSingle(){
             }
             {
                 pokemon && (
-                    <>
-                        <h1>{pokemon.name}</h1>
-                        <Gallery images={images} />
-
-                    </>
+                    <section id='main-info'>
+                        <div className="gallery-container">
+                            <Gallery images={images} />
+                        </div>
+                        <div className="details-container">
+                            <PokemonDetails pokemon={pokemon} />
+                        </div>
+                       
+                    </section>
+                        
                 )
             }
             

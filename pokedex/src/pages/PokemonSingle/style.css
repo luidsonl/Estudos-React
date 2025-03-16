@@ -1,0 +1,19 @@
+#main-info {
+    display: flex;
+    width: 100%;
+    
+    & .gallery-container{
+        flex: 2;
+    }
+
+    & .details-container{
+        flex: 1;
+    }
+}
+@media screen and (max-width: 768px){
+    #main-info{
+        flex-direction: column;
+    }
+        
+
+}
