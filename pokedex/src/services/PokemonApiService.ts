@@ -79,6 +79,11 @@ class PokemonApiService {
     return this.getWithCache(url, () => fetchApi(url));
   }
 
+  getPokemonByName(name: string): Promise<PokemonTypes> {
+    const url = `${this.apiBaseUrl}/pokemon/${name}`;
+    return this.getWithCache(url, () => fetchApi(url));
+  }
+
   async searchPokemons(searchTerm: string, page: number = 1, limit: number = 20): Promise<PokemonList> {
     const allPokemons = await this.getAllPokemons();
     const filteredPokemons = allPokemons.results.filter(pokemon =>
