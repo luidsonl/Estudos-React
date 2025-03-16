@@ -15,6 +15,10 @@
     --main-menu-text-light: #111;
     --main-menu-text-dark: #eee;
 
+    --gray: #ccc;
+    --white: #fff;
+    --black: #000;
+
     /*heading size*/
     --h1-size: 2.5rem;
     --h2-size: 2rem;
