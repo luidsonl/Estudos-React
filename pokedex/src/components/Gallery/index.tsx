@@ -5,7 +5,7 @@ interface GalleryProps {
   images: string[];
 }
 
-const Gallery = ({ images }: GalleryProps) => {
+function Gallery ({ images }: GalleryProps) {
   const [selectedImage, setSelectedImage] = useState<string>(images[0]);
 
   return (
