@@ -4,6 +4,7 @@ import Head from '../../components/Head';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import SeoTypes from '../../types/SeoTypes';
+import WhataHellIsThisPokemon from '../../components/WhataHellIsThisPokemon';
 
 function Home() {
   const [seo, setSeo] = useState<SeoTypes | undefined>();
@@ -22,7 +23,7 @@ function Home() {
     <>
       <Head seo={seo} />
       <MainLayout>
-        <h1>Home</h1>
+        <WhataHellIsThisPokemon/>
       </MainLayout>
     </>
   );
