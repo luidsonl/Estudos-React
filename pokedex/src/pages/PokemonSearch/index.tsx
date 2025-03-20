@@ -62,9 +62,13 @@ function PokemonSearch() {
         </section>
         <section id='pokemon-list'>
           {pokemonList ? (
-            pokemonList.results.map((pokemon, index) => (
-              <PokemonCard key={index} url={pokemon.url}/>
-            ))
+            pokemonList.results.length > 0 ? (
+              pokemonList.results.map((pokemon, index) => (
+                <PokemonCard key={index} url={pokemon.url}/>
+              ))
+            ) : (
+              <div>Nenhum resultado encontrado</div>
+            )
           ) : (
             <div>Carregando</div>
           )}
