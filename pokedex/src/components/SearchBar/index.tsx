@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import './style.css'
 
 function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +24,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className='search-bar'>
       <input
         type="text"
         value={searchTerm}
