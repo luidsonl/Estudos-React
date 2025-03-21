@@ -36,12 +36,19 @@
             & h1{
                 font-size: var(--h1-size);
             }
+            & .button-container{
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+                margin-bottom: 10px;
 
-            & .more-details a{
-                padding: 10px 20px;
-                background-color: var(--grey);
-                
+                & .button{
+                    padding: 10px 20px;
+                    background-color: var(--grey);
+                    cursor: pointer;
+                }
             }
+            
         }
         
     }

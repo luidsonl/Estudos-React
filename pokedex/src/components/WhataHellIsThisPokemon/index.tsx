@@ -8,30 +8,27 @@ function WhataHellIsThisPokemon(){
     const [selectedPokemon, setSelectedPokemon] = useState<null | PokemonTypes>(null);
     const [show, setShow] = useState(false)
 
+    async function setup() {
+        const allPokemons = await PokemonApiService.getAllPokemons();
+
+        const length = allPokemons.results.length;
+        const randomIndex = Math.floor(Math.random() * length);
+        const randomPokemon = allPokemons.results[randomIndex];
+
+        const selectedPokemon = await PokemonApiService.getPokemonByUrl(randomPokemon.url);
+
+        setSelectedPokemon(selectedPokemon)
+        setShow(false);
+
+        console.log(selectedPokemon.name)
+    }
+
     useEffect(()=>{
-        async function setup() {
-            const allPokemons = await PokemonApiService.getAllPokemons();
-
-            const length = allPokemons.results.length;
-            const randomIndex = Math.floor(Math.random() * length);
-            const randomPokemon = allPokemons.results[randomIndex];
-
-            const selectedPokemon = await PokemonApiService.getPokemonByUrl(randomPokemon.url);
-
-            setSelectedPokemon(selectedPokemon)
-            setShow(false);
-
-            console.log(selectedPokemon.name)
-        }
-
         setup()
     },[])
 
-
-
     return(
         <section className="whatahell">
-            
             {selectedPokemon &&(
                 <>
                     <div className="pokemon-image-container">
@@ -40,7 +37,6 @@ function WhataHellIsThisPokemon(){
                                 <img onClick={()=>setShow(true)} className={show ? 'show' : 'hide'} src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name} />
                             )
                         }
-                        
                     </div>
                     <div className="pokemon-description-container">
                         {
@@ -49,9 +45,15 @@ function WhataHellIsThisPokemon(){
                                     <h1>
                                         {selectedPokemon.name}
                                     </h1>
-                                    <button className="more-details">
-                                        <Link to={`/pokemon/${selectedPokemon.name}`}>Ver detalhes</Link>
-                                    </button>
+                                    <div className="button-container">
+                                        <Link className="button" to={`/pokemon/${selectedPokemon.name}`}>Ver detalhes</Link>
+                                    </div>
+                                    <div className="button-container" onClick={setup}>
+                                        <div className="button">
+                                            Recarregar Pokémon
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="pokemon-description">
@@ -66,9 +68,6 @@ function WhataHellIsThisPokemon(){
             )}
         </section>
     )
-
-
 }
-
 
 export default WhataHellIsThisPokemon;
