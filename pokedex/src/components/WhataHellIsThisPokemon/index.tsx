@@ -50,7 +50,7 @@ function WhataHellIsThisPokemon(){
                                     </div>
                                     <div className="button-container" onClick={setup}>
                                         <div className="button">
-                                            Recarregar Pokémon
+                                            Outra vez
                                         </div>
                                         
                                     </div>
